@@ -92,7 +92,7 @@ publishing {
             pom {
                 name = "Lenient Registry"
                 description = "Ignores RemapException caused by missing client-side registry entries, allowing clients without the mod to join (most safely)."
-                url = "https://github.com/KrisTHL181/lenient-registry"
+                url = "https://github.com/KrisTHL181/LenientRegistry"
 
                 licenses {
                     license {
@@ -110,9 +110,9 @@ publishing {
                 }
 
                 scm {
-                    connection = "scm:git:https://github.com/KrisTHL181/lenient-registry.git"
-                    developerConnection = "scm:git:ssh://github.com/KrisTHL181/lenient-registry.git"
-                    url = "https://github.com/KrisTHL181/lenient-registry"
+                    connection = "scm:git:https://github.com/KrisTHL181/LenientRegistry.git"
+                    developerConnection = "scm:git:ssh://github.com/KrisTHL181/LenientRegistry.git"
+                    url = "https://github.com/KrisTHL181/LenientRegistry"
                 }
             }
         }
@@ -132,7 +132,7 @@ publishing {
         // 示例 3：发布到 GitHub Packages / Nexus / Artifactory（需认证）
         // maven {
         //     name = "GitHubPackages"
-        //     url = "https://maven.pkg.github.com/KrisTHL181/lenient-registry"
+        //     url = "https://maven.pkg.github.com/KrisTHL181/LenientRegistry"
         //     credentials {
         //         username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
         //         password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
