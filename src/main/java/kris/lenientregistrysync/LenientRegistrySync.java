@@ -1,11 +1,11 @@
-package kris.lenientregistry;
+package kris.lenientregistrysync;
 
 import net.fabricmc.api.ClientModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LenientRegistry implements ClientModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger("lenient-registry");
+public class LenientRegistrySync implements ClientModInitializer {
+    public static final Logger LOGGER = LoggerFactory.getLogger("lenient-registry-sync");
     public static Config CONFIG;
 
     @Override

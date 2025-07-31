@@ -1,4 +1,4 @@
-package kris.lenientregistry;
+package kris.lenientregistrysync;
 
 import com.google.gson.*;
 import java.io.*;
@@ -9,7 +9,7 @@ public class Config {
     public String[] ignored_mods = {};
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final Path CONFIG_PATH = Path.of("config", "lenient-registry.json");
+    private static final Path CONFIG_PATH = Path.of("config", "lenient-registry-sync.json");
 
     public static Config load() {
         Config config = new Config();
@@ -18,9 +18,9 @@ public class Config {
             try {
                 Files.createDirectories(CONFIG_PATH.getParent());
                 Files.writeString(CONFIG_PATH, GSON.toJson(config));
-                LenientRegistry.LOGGER.info("Created default config: lenient-registry.json");
+                LenientRegistrySync.LOGGER.info("Created default config: lenient-registry-sync.json");
             } catch (IOException e) {
-                LenientRegistry.LOGGER.warn("Failed to create config file!", e);
+                LenientRegistrySync.LOGGER.warn("Failed to create config file!", e);
             }
             return config;
         }
@@ -34,7 +34,7 @@ public class Config {
                 config.ignored_mods[i] = mods.get(i).getAsString();
             }
         } catch (Exception e) {
-            LenientRegistry.LOGGER.warn("Failed to load config, using defaults. Error: " + e.getMessage());
+            LenientRegistrySync.LOGGER.warn("Failed to load config, using defaults. Error: " + e.getMessage());
             return config;
         }
 
@@ -45,7 +45,7 @@ public class Config {
         try (Writer writer = Files.newBufferedWriter(CONFIG_PATH)) {
             writer.write(GSON.toJson(this));
         } catch (IOException e) {
-            LenientRegistry.LOGGER.warn("Failed to save config!", e);
+            LenientRegistrySync.LOGGER.warn("Failed to save config!", e);
         }
     }
 }

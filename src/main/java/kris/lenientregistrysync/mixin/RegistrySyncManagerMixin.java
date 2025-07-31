@@ -1,6 +1,5 @@
-package kris.lenientregistry.mixin;
+package kris.lenientregistrysync.mixin;
 
-import kris.lenientregistry.LenientRegistry;
 import net.fabricmc.fabric.impl.registry.sync.RemapException;
 import net.fabricmc.fabric.impl.registry.sync.RegistrySyncManager;
 import net.minecraft.text.MutableText;
@@ -8,6 +7,8 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+
+import kris.lenientregistrysync.LenientRegistrySync;
 
 @Mixin(RegistrySyncManager.class)
 public class RegistrySyncManagerMixin {
@@ -20,8 +21,8 @@ public class RegistrySyncManagerMixin {
         remap = false
     )
     private static RemapException onRemapException(Text message) {
-        if (LenientRegistry.CONFIG.enabled) {
-            LenientRegistry.LOGGER.warn("[LenientRegistry] Ignoring missing registry entries");
+        if (LenientRegistrySync.CONFIG.enabled) {
+            LenientRegistrySync.LOGGER.warn("[LenientRegistry] Ignoring missing registry entries");
             return null; // 返回 null 以取消抛出异常
         }
         return new RemapException(message);

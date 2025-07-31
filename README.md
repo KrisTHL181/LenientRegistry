@@ -1,4 +1,4 @@
-# Lenient Registry
+# Lenient Registry Sync
 
 ## 描述
 
@@ -11,7 +11,7 @@
 
 ## 配置
 
-在 `config/` 文件夹中将会生成 `lenient-registry.json` 配置文档。
+在 `config/` 文件夹中将会生成 `lenient-registry-sync.json` 配置文档。
 `enabled` 字段用于启用/关闭这个mod的作用，`ignored_mods` 列表用于指定忽略的项。
 
 ## 许可证

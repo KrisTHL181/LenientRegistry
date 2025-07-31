@@ -1,25 +1,25 @@
 {
 	"schemaVersion": 1,
-	"id": "lenient-registry",
+	"id": "lenient-registry-sync",
 	"version": "${version}",
-	"name": "Lenient Registry",
+	"name": "Lenient Registry Sync",
 	"description": "Ignores RemapException caused by missing client-side registry entries and allowing clients without the mod to join (most safely).",
 	"authors": [
 		"KrisTHL181"
 	],
 	"contact": {
-		"sources": "https://github.com/KrisTHL181/LenientRegistry"
+		"sources": "https://github.com/KrisTHL181/LenientRegistrySync"
 	},
 	"license": "Apache-2.0",
 	"icon": "assets/lenient-registry/icon.png",
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"kris.lenientregistry.LenientRegistry"
+			"kris.lenientregistrysync.LenientRegistrySync"
 		]
 	},
 	"mixins": [
-		"lenient-registry.mixins.json"
+		"lenient-registry-sync.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.23",
