@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "lenient-registry",
+	"version": "${version}",
+	"name": "Lenient Registry",
+	"description": "Ignores RemapException caused by missing client-side registry entries and allowing clients without the mod to join (most safely).",
+	"authors": [
+		"KrisTHL181"
+	],
+	"contact": {
+		"sources": "https://github.com/KrisTHL181/lenient-registry"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/lenient-registry/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"kris.lenientregistry.LenientRegistry"
+		]
+	},
+	"mixins": [
+		"lenient-registry.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.23",
+		"minecraft": "1.20.x",
+		"java": ">=17",
+		"fabric": ">=0.90.0"
+	}
+}

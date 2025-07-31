@@ -1,0 +1,142 @@
+plugins {
+	id 'fabric-loom' version "${loom_version}"
+	// id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	// Add repositories to retrieve artifacts from in here.
+	// You should only use this when depending on other mods because
+	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
+	// for more information about repositories.
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"lenient-registry" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+
+}
+
+dependencies {
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// Fabric API. This is technically optional, but you probably want it anyway.
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": inputs.properties.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	it.options.release = 17
+}
+
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	inputs.property "archivesName", project.base.archivesName
+
+	from("LICENSE") {
+		rename { "${it}_${inputs.properties.archivesName}"}
+	}
+}
+
+// configure the maven publication
+/*
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            artifactId = project.archives_base_name // lenient-registry
+
+            // 使用 Loom 生成的最终 jar（已重映射）
+            artifact(remapJar) // 主要发布物：适用于 Minecraft 客户端的 Mod JAR
+
+            // 可选：同时发布原始 jar（未重映射，用于开发）
+            // artifact(jar)
+
+            // 发布源码 Jar（推荐）
+            artifact sourcesJar
+
+            // POM 元数据
+            pom {
+                name = "Lenient Registry"
+                description = "Ignores RemapException caused by missing client-side registry entries, allowing clients without the mod to join (most safely)."
+                url = "https://github.com/KrisTHL181/lenient-registry"
+
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "KrisTHL181"
+                        name = "KrisTHL181"
+                        email = "KrisTHL181@outlook.com" // 可选，建议填一个联系邮箱
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:https://github.com/KrisTHL181/lenient-registry.git"
+                    developerConnection = "scm:git:ssh://github.com/KrisTHL181/lenient-registry.git"
+                    url = "https://github.com/KrisTHL181/lenient-registry"
+                }
+            }
+        }
+    }
+
+    // 发布目标仓库（示例：发布到本地或远程）
+    repositories {
+        // 示例 1：发布到本地 Maven 缓存（~/.m2/repository）
+        // mavenLocal()
+
+        // 示例 2：发布到构建目录下的本地仓库（用于测试）
+        // maven {
+        //     name = "localTestRepo"
+        //     url = layout.buildDirectory.dir("repo")
+        // }
+
+        // 示例 3：发布到 GitHub Packages / Nexus / Artifactory（需认证）
+        // maven {
+        //     name = "GitHubPackages"
+        //     url = "https://maven.pkg.github.com/KrisTHL181/lenient-registry"
+        //     credentials {
+        //         username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+        //         password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+        //     }
+        }
+    }
+*/
